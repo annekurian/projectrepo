@@ -18,6 +18,14 @@ img {
   width: 300px;
   height: 300px;
 }
+a {
+  color: palevioletred;
+}
+a:hover,
+a:focus,
+a:active {
+  color: purple;
+}
 nav {
   display: flex;
   margin: 0 2em;
@@ -30,6 +38,7 @@ nav a {
   font-size: 1.7em;
   text-decoration-line: none;
   text-align: right;
+  transition: all 0.5s ease-out;
 }
 nav a:hover {
   background-color: palevioletred;
