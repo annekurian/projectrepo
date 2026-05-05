@@ -1,0 +1,50 @@
+p {
+  margin: 2em;
+  font-size: 1.2em;
+}
+h1 {
+  font-size: 2.6em;
+  font-weight: bold;
+  font-family: cursive;
+}
+h2 {
+  font-size: 1.7em;
+  text-decoration-line: underline;
+}
+h3 {
+  font-size: 1.3em;
+}
+img {
+  width: 300px;
+  height: 300px;
+}
+.banner {
+  margin: 1em;
+  padding: 0.2em;
+  background-color: mistyrose;
+  text-align: center;
+}
+.recipe-card {
+  margin-left: 2em;
+  width: 80vw;
+  font-size: 1.2em;
+  color: #333;
+}
+.relative {
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+.fixed {
+  position: fixed;
+  top: 300px;
+  left: 300px;
+}
+.container {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+  top: 230px;
+  left: 230px;
+}
