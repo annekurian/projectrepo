@@ -21,13 +21,12 @@ img {
 nav {
   display: flex;
   margin: 0 2em;
-  gap: 2em;
   padding-bottom: 1em;
   border-bottom: palevioletred solid 1.5px;
 }
 nav a {
   color: palevioletred;
-  margin-right: 2em;
+  margin-right: 1em;
   font-size: 1.7em;
   text-decoration-line: none;
   text-align: right;
@@ -64,4 +63,35 @@ footer ul {
   margin-left: 2em;
   font-size: 1.2em;
   color: #333;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 1em;
+  background: mistyrose;
+}
+.col2 {
+  margin-right: 2em;
+}
+@media screen and (width < 740px) {
+  .recipe-card-container {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (width > 740px) {
+  .wrapper {
+    max-width: 950px;
+  }
+}
+
+@media screen and (width > 1200px) {
+  .wrapper {
+    max-width: 1200px;
+    font-size: 1.3em;
+  }
+  .recipe-card-container {
+    font-size: 1.4em;
+  }
 }
