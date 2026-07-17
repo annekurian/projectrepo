@@ -52,6 +52,20 @@ app.put("/students", (req, res) => {
   );
 });
 
+app.post("/students/:studentId", (req, res) => {
+  db.run(
+    "UPDATE students SET email = ? WHERE id = ?",
+    [req.body.email, req.params.studentId],
+    (err) => {
+      if (err) res.status(500).send(`Error updating new student record.${err}`);
+      else
+        res
+          .status(200)
+          .send(`Student with ID ${req.params.studentId} record updated`);
+    },
+  );
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
