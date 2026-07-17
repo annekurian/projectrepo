@@ -6,6 +6,21 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database("./db/students.db");
+
+app.get("/students", (req, res) => {
+  db.all("SELECT * FROM students", (err, rows) => {
+    if (err) {
+      res.status(500).send("Unknown error");
+    } else if (rows) {
+      res.status(200).json(rows);
+    } else {
+      res.status(404).send("No records found");
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
