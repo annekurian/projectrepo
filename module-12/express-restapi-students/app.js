@@ -21,6 +21,23 @@ app.get("/students", (req, res) => {
   });
 });
 
+app.get("/students/:studentId", (req, res) => {
+  db.all(
+    "SELECT * FROM students WHERE id = ?",
+    req.params.studentId,
+    (err, row) => {
+      console.log(row);
+      if (err) {
+        res.status(500).send("Unknown error");
+      } else if (!row.length) {
+        res.status(404).send("No record found");
+      } else {
+        res.status(200).json(row);
+      }
+    },
+  );
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
