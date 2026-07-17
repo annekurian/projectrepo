@@ -38,7 +38,7 @@ app.get("/students/:studentId", (req, res) => {
   );
 });
 
-app.put("/students", (req, res) => {
+app.post("/students", (req, res) => {
   db.run(
     "INSERT INTO students (name, email, program) VALUES(?,?,?)",
     [req.body.name, req.body.email, req.body.program],
@@ -52,18 +52,28 @@ app.put("/students", (req, res) => {
   );
 });
 
-app.post("/students/:studentId", (req, res) => {
+app.put("/students/:studentId", (req, res) => {
   db.run(
     "UPDATE students SET email = ? WHERE id = ?",
     [req.body.email, req.params.studentId],
     (err) => {
-      if (err) res.status(500).send(`Error updating new student record.${err}`);
+      if (err) res.status(500).send(`Error updating student record.${err}`);
       else
         res
           .status(200)
-          .send(`Student with ID ${req.params.studentId} record updated`);
+          .send(`Student ID ${req.params.studentId} updated succesfully`);
     },
   );
+});
+
+app.delete("/students/:studentId", (req, res) => {
+  db.run("DELETE FROM students WHERE id = ?", [req.params.studentId], (err) => {
+    if (err) res.status(500).send(`Error deleting student record.${err}`);
+    else
+      res
+        .status(200)
+        .send(`Student ID ${req.params.studentId} deleted succesfully`);
+  });
 });
 
 app.listen(port, () => {
