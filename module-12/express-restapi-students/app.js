@@ -38,6 +38,20 @@ app.get("/students/:studentId", (req, res) => {
   );
 });
 
+app.put("/students", (req, res) => {
+  db.run(
+    "INSERT INTO students (name, email, program) VALUES(?,?,?)",
+    [req.body.name, req.body.email, req.body.program],
+    (err) => {
+      if (err) res.status(500).send(`Error adding new student record.${err}`);
+      else
+        res
+          .status(200)
+          .send(`New student record added with ID: ${this.lastID}`);
+    },
+  );
+});
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
