@@ -22,7 +22,7 @@ app.get("/students", (req, res) => {
 });
 
 app.get("/students/:studentId", (req, res) => {
-  db.all(
+  db.get(
     "SELECT * FROM students WHERE id = ?",
     req.params.studentId,
     (err, row) => {
