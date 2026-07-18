@@ -50,12 +50,12 @@ app.post("/students", (req, res) => {
   db.run(
     "INSERT INTO students (name, email, program) VALUES(?,?,?)",
     [name, email, program],
-    (err) => {
+    function (err) {
       if (err) res.status(500).send(`Error adding new student record.${err}`);
       else
         res
           .status(201)
-          .send(`New student record added with ID: ${this.lastID}`);
+          .send(`New student record added with ID - ${this.lastID}`);
     },
   );
 });
