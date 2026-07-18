@@ -72,8 +72,10 @@ app.put("/students/:studentId", (req, res) => {
   db.run(
     "UPDATE students SET email = ? WHERE id = ?",
     [email, req.params.studentId],
-    (err) => {
+    function (err) {
       if (err) res.status(500).send(`Error updating student record.${err}`);
+      else if (this.changes == 0)
+        res.status(404).send(`Student ID ${req.params.studentId} not found`);
       else
         res
           .status(200)
@@ -83,13 +85,19 @@ app.put("/students/:studentId", (req, res) => {
 });
 
 app.delete("/students/:studentId", (req, res) => {
-  db.run("DELETE FROM students WHERE id = ?", [req.params.studentId], (err) => {
-    if (err) res.status(500).send(`Error deleting student record.${err}`);
-    else
-      res
-        .status(200)
-        .send(`Student ID ${req.params.studentId} deleted succesfully`);
-  });
+  db.run(
+    "DELETE FROM students WHERE id = ?",
+    [req.params.studentId],
+    function (err) {
+      if (err) res.status(500).send(`Error deleting student record.${err}`);
+      else if (this.changes == 0)
+        res.status(404).send(`Student ID ${req.params.studentId} not found`);
+      else
+        res
+          .status(200)
+          .send(`Student ID ${req.params.studentId} deleted succesfully`);
+    },
+  );
 });
 
 app.use((err, req, res, next) => {
