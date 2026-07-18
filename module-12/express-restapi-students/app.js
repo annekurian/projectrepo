@@ -39,23 +39,39 @@ app.get("/students/:studentId", (req, res) => {
 });
 
 app.post("/students", (req, res) => {
+  const { name, email, program } = req.body;
+  if (
+    !name ||
+    typeof name != "string" ||
+    typeof email != "string" ||
+    typeof program != "string"
+  )
+    return res.status(400).send("Invalid input data");
   db.run(
     "INSERT INTO students (name, email, program) VALUES(?,?,?)",
-    [req.body.name, req.body.email, req.body.program],
+    [name, email, program],
     (err) => {
       if (err) res.status(500).send(`Error adding new student record.${err}`);
       else
         res
-          .status(200)
+          .status(201)
           .send(`New student record added with ID: ${this.lastID}`);
     },
   );
 });
 
 app.put("/students/:studentId", (req, res) => {
+  const { name, email, program } = req.body;
+  if (
+    !name ||
+    typeof name != "string" ||
+    typeof email != "string" ||
+    typeof program != "string"
+  )
+    return res.status(400).send("Invalid input data");
   db.run(
     "UPDATE students SET email = ? WHERE id = ?",
-    [req.body.email, req.params.studentId],
+    [email, req.params.studentId],
     (err) => {
       if (err) res.status(500).send(`Error updating student record.${err}`);
       else
@@ -74,6 +90,11 @@ app.delete("/students/:studentId", (req, res) => {
         .status(200)
         .send(`Student ID ${req.params.studentId} deleted succesfully`);
   });
+});
+
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status == 400)
+    return res.status(400).send("Invalid input data format");
 });
 
 app.listen(port, () => {
