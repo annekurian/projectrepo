@@ -29,7 +29,7 @@ app.get("/students/:studentId", (req, res) => {
       console.log(row);
       if (err) {
         res.status(500).send("Unknown error");
-      } else if (!row.length) {
+      } else if (!row) {
         res.status(404).send("No record found");
       } else {
         res.status(200).json(row);
