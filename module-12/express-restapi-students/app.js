@@ -42,6 +42,8 @@ app.post("/students", (req, res) => {
   const { name, email, program } = req.body;
   if (
     !name ||
+    !email ||
+    !program ||
     typeof name != "string" ||
     typeof email != "string" ||
     typeof program != "string"
@@ -64,14 +66,16 @@ app.put("/students/:studentId", (req, res) => {
   const { name, email, program } = req.body;
   if (
     !name ||
+    !email ||
+    !program ||
     typeof name != "string" ||
     typeof email != "string" ||
     typeof program != "string"
   )
     return res.status(400).send("Invalid input data");
   db.run(
-    "UPDATE students SET email = ? WHERE id = ?",
-    [email, req.params.studentId],
+    "UPDATE students SET name = ?, email = ?, program = ? WHERE id = ?",
+    [name, email, program, req.params.studentId],
     function (err) {
       if (err) res.status(500).send(`Error updating student record.${err}`);
       else if (this.changes == 0)
