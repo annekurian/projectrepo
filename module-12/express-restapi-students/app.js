@@ -55,9 +55,10 @@ app.post("/students", (req, res) => {
     function (err) {
       if (err) res.status(500).send(`Error adding new student record.${err}`);
       else
-        res
-          .status(201)
-          .send(`New student record added with ID - ${this.lastID}`);
+        res.status(201).json({
+          id: this.lastID,
+          message: "Student record added succesfully",
+        });
     },
   );
 });
