@@ -1,6 +1,6 @@
 const MethodList = () => {
   return (
-    <div class="py-4">
+    <div className='py-4'>
       <h3>Method</h3>
       <ol>
         <li>Pre-heat the oven at 180° celsius.</li>

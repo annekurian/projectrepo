@@ -1,5 +1,5 @@
-import IngredientsList from "./IngredientsList";
-import MethodList from "./MethodList";
+import IngredientsList from './IngredientsList';
+import MethodList from './MethodList';
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ interface Props {
 
 const Card = ({ title, category, imageUrl, imageAlt }: Props) => {
   return (
-    <div class="p-4">
+    <div className='p-4'>
       <h2>{title}</h2>
       <img src={imageUrl} alt={imageAlt} />
       <div>
